@@ -1,0 +1,27 @@
+{% extends "dietmanager/base.html" %}
+{% block content %}
+    <div id="login">
+        <form action="{% url 'dietmanager:login_user' %}" method="post">
+	        {% csrf_token %}
+	        <div class="control-group">
+	            <label class="control-label" for="username">Username</label>
+	            <div class="controls">
+	                <input type="text" id="username" name="username"  placeholder="Username" required/>
+	            </div>
+	        </div>
+	        <div class="control-group">
+	            <label class="control-label" for="password">Password</label>
+	            <div class="controls">
+	                <input type="password" name="password" id="password" placeholder="Password" required/>
+	            </div>
+	        </div>
+	        <br/>
+	        <div class="control-group">
+	            <div class="controls">
+	                <button type="submit" class="btn">Login</button>
+	            </div>
+	        </div>
+        </form>
+        <h1>{{ message }}</h1>
+    </div>
+{% endblock %}
