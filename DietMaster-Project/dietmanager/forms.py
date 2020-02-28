@@ -8,3 +8,9 @@ class RegisterForm(forms.Form):
     first_name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
     last_name = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
     phone_number = forms.CharField(widget=forms.NumberInput(attrs={'class':'form-control'}), required=False)
+
+class HealthForm(forms.Form):
+    gender = forms.BoolField(widget=forms.BoolInput(attrs={'class':'form-control'}))
+    weight = forms.CharField(widget=forms.NumberInput(attrs={'class':'form-control'}))
+    height = forms.CharField(widget=forms.NumberInput(attrs={'class':'form-control'}))
+    Active = forms.BoolField(widget=forms.BoolInput(attrs={'class':'form-control'}))
