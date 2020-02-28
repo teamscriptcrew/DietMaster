@@ -1,0 +1,81 @@
+<html>
+<head>
+<style>
+body {
+  background-image: url("https://envato-shoebox-0.imgix.net/4ed0/80f1-e534-4b02-9cc2-e2f852cd58ce/back_b261.jpg?auto=compress%2Cformat&fit=max&mark=https%3A%2F%2Felements-assets.envato.com%2Fstatic%2Fwatermark2.png&markalign=center%2Cmiddle&markalpha=18&w=1000&s=e618a4dd65bcb7389db840fd2f7c15ab");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size:cover;
+  width:100%;
+  height:100%;
+}
+h1{
+font-family: "Times New Roman", Times, serif;
+}
+#details:hover{
+color:green;
+}
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+#det:hover{
+color:green;
+}
+</style>
+</head>
+<body>
+<center><b><h1>Welcome!</b></h1>
+<br>
+<br>
+<i id="details">Your details are shown below..</i><br><br><br>
+<table id="customers">
+  <tr>
+    <th>User</th>
+    <th>Proteins</th>
+    <th>Carbohydrate</th>
+    <th>Fats</th>
+    <th>Calories</th>
+  </tr>
+  <tr>
+    <td>{{ user }}</td>
+    <td>12</td>
+    <td>45</td>
+    <td>2</td>
+    <td>345</td>
+  </tr>
+  <tr>
+    <td>Arjun</td>
+    <td>10</td>
+    <td>34</td>
+    <td>4</td>
+    <td>457</td>
+  </tr>
+  <tr>
+    <td>Athul</td>
+    <td>7</td>
+    <td>39</td>
+    <td>9</td>
+    <td>557</td>
+  </tr>
+</table>
+</body>
+</html>
