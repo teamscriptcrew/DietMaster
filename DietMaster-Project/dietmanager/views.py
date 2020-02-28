@@ -76,3 +76,7 @@ def login_user(request, message=""):
 @login_required(login_url='/login/')
 def health(request):
 	return render(request, "dietmanager/health.html")
+
+@login_required(login_url='/login/')
+def main(request):
+	return render(request, "dietmanager/main.html")
