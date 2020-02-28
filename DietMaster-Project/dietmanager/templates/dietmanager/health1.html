@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<style>
+.mainf{
+width:50%;
+}
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+input[type=radio]{
+
+}
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+</style>
+<body>
+
+<center><h1>Health</h1></center>
+<center>
+<div class="mainf">
+  <form action="/action_page.php">
+    <label for="height">Height</label>
+    <input type="text" class="height" name="ht" placeholder="Your Height in cm">
+    <label for="weight">Weight</label>
+    <input type="text" class="weight" name="wt" placeholder="Your Weight in kg"><br><br>
+    <label for="gen">Choose your gender..</label><br><br>
+    <select id="is_male" name="gender">
+      <option value="Less Active">Less Active</option>
+      <option value="Moderately Active">Moderately Active</option>
+      <option value="Very Active">Very Active</option>
+    </select><br><br>
+    <label for="age">Enter your age....</label><br><br>
+    <input type="text" class="age" name="ageing" placeholder="Your Age...">
+    <label for="active">How active are you?</label>
+    <select id="is_active" name="activity">
+      <option value="Less Active">Less Active</option>
+      <option value="Moderately Active">Moderately Active</option>
+      <option value="Very Active">Very Active</option>
+    </select></form>
+</div></center>
+</body>
+</html>
