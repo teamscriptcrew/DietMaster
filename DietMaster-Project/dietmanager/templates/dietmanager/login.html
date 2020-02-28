@@ -1,7 +1,7 @@
-{% extends "MyModule/base.html" %}
+{% extends "dietmanager/base.html" %}
 {% block content %}
     <div id="login">
-        <form action="{% url 'MyModule:login_user' %}" method="post">
+        <form action="{% url 'dietmanager:login_user' %}" method="post">
 	        {% csrf_token %}
 	        <div class="control-group">
 	            <label class="control-label" for="username">Username</label>
