@@ -46,20 +46,33 @@ div {
     {% csrf_token %}
     <label for="height">Height</label>
     <input type="text" class="height" name="height" placeholder="Your Height in cm" required>
+    <br/><br/><br>
     <label for="weight">Weight</label>
-    <input type="text" class="weight" name="weight" placeholder="Your Weight in kg"><br><br>
+    <input type="text" class="weight" name="weight" placeholder="Your Weight in kg">
+    <br/><br/><br>
     <label for="gen">Choose your gender..</label><br><br>
     <select id="is_male" name="gender">
       <option value="Male">Male</option>
       <option value="Female">Female</option>
-    </select><br><br>
+    </select><br/><br/><br>
     <label for="age">Enter your age....</label><br><br>
     <input type="text" class="age" name="age" placeholder="Your Age...">
+    <br/><br/><br>
     <label for="active">How active are you?</label>
     <select name="is_active" id="is_active" name="activity">
       <option value="Less_Active">Less Active</option>
       <option value="Moderately_Active">Moderately Active</option>
       <option value="Very_Active">Very Active</option>
+    </select>
+    <br/><br/><br>
+    <label for="active">Are you a patient?</label>
+    <select name="diseases" id="diseases" name="activity">
+      <option value="None">None</option>
+      <option value="Cholestrol">Cholestorl</option>
+      <option value="Diabetes">Diabetes</option>
+      <option value="PCOS">PCOS</option>
+      <option value="Hypertension">Hypertension</option>
+      <option value="Thyroid">Thyroid</option>
     </select>
     <input type="submit" class="submit"  value="Submit">
 </form>

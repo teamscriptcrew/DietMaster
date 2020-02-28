@@ -80,18 +80,54 @@ def login_user(request, message=""):
 	return render(request, 'dietmanager/login.html', {message:"No such user found"})
 
 def getDiet(calories):
+
+    # Make this better
+    morning=["idli","dosa","puttu","oats","noodles","salad","bread","sandwich","idiyappam","appam","ada","vada"]
+    afternoon=["fish","porotta","pork","salad","rice"]
+    night=["fish","porotta","pork","noodles","salad","rice"]
+    snacks=["pastry","biscuit","fries","chocolate","pasta","vada pav"]
+    Drinks=["coffee","tea","milk","shake"]
+    others=["curd","yogurt","burger","peanuts"]
+    fruits=["banana","apple","grapes","carrots"]
+    curry=["sambar","avial","stew"]
     permeal = round(calories)//3
     df = DataFrame(read_csv("foodData.csv"))
     l2 = []
+    f1 = []
+    f2 = []
+    f3 = []
     for j in range(3):
         c = 0
         l = []
+        #i = randint(0,100)
         while(permeal>c):
             i = randint(0,100)
-            l.append(df["name"][i])
-            c += df["calories"][i]
-        l2.append(l)
+
+            # After editing the csv file, replace the mornings with afternoon and night respectievely at j=1 and j=2
+            if(j==0):
+                datas = []
+                datas.append(df.loc[df['name'].isin(morning)])
+                x = randint(0,len(datas[0])-1)
+                calories = datas[0].iloc[x]["calories"]
+                c += calories
+                f1.append(datas[0].iloc[x]["name"])
+            elif(j==1):
+                datas = []
+                datas.append(df.loc[df["name"].isin(morning)])
+                x = randint(0,len(datas[0])-1)
+                c += datas[0].iloc[x]["calories"]
+                f2.append(datas[0].iloc[x]["name"])
+            elif(j==2):
+                datas = []
+                datas.append(df.loc[df["name"].isin(morning)])
+                x = randint(0, len(datas[0])-1)
+                c += datas[0].iloc[x]["calories"]
+                f3.append(datas[0].iloc[x]["name"])
+    l2.append(f1)
+    l2.append(f2)
+    l2.append(f3)
     return l2
+
 
 @login_required(login_url='/login/')
 def health(request):
@@ -102,7 +138,6 @@ def health(request):
     except:
         pass
     if request.POST:
-        print("POST")
         forms = HealthModel()
         current_user = request.user
         forms.username = current_user
@@ -110,6 +145,7 @@ def health(request):
         forms.weight = request.POST['weight']
         forms.height = request.POST['height']
         active = request.POST['is_active']
+        diseases = request.POST['diseases']
         if(active=="Very_Active"):
             forms.isActive = True
             forms.isnotActive = False
@@ -147,7 +183,8 @@ def health(request):
         calories = lr.predict([lib])
         l2 = joblib.load("calories_to_nutrients.pkl")
         values = l2.predict(calories)
-        diet = getDiet(calories[0][0])
+        c = calories[0][0]
+        diet = getDiet(c)
         return render(request, "dietmanager/home.html",{"calories":calories[0][0],"carbs":values[0][0],"proteins":values[0][1],"fats":values[0][2],"diet":diet})
     else:
         return render(request, "dietmanager/health1.html")
