@@ -42,25 +42,27 @@ div {
 <center><h1>Health</h1></center>
 <center>
 <div class="mainf">
-  <form action="/action_page.php">
+  <form action="{{ store }}" method=POST>
+    {% csrf_token %}
     <label for="height">Height</label>
-    <input type="text" class="height" name="ht" placeholder="Your Height in cm">
+    <input type="text" class="height" name="height" placeholder="Your Height in cm" required>
     <label for="weight">Weight</label>
-    <input type="text" class="weight" name="wt" placeholder="Your Weight in kg"><br><br>
+    <input type="text" class="weight" name="weight" placeholder="Your Weight in kg"><br><br>
     <label for="gen">Choose your gender..</label><br><br>
     <select id="is_male" name="gender">
-      <option value="Less Active">Less Active</option>
-      <option value="Moderately Active">Moderately Active</option>
-      <option value="Very Active">Very Active</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
     </select><br><br>
     <label for="age">Enter your age....</label><br><br>
-    <input type="text" class="age" name="ageing" placeholder="Your Age...">
+    <input type="text" class="age" name="age" placeholder="Your Age...">
     <label for="active">How active are you?</label>
-    <select id="is_active" name="activity">
-      <option value="Less Active">Less Active</option>
-      <option value="Moderately Active">Moderately Active</option>
-      <option value="Very Active">Very Active</option>
-    </select></form>
+    <select name="is_active" id="is_active" name="activity">
+      <option value="Less_Active">Less Active</option>
+      <option value="Moderately_Active">Moderately Active</option>
+      <option value="Very_Active">Very Active</option>
+    </select>
+    <input type="submit" class="submit"  value="Submit">
+</form>
 </div></center>
 </body>
 </html>
