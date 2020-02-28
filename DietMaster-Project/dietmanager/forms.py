@@ -11,9 +11,11 @@ class RegisterForm(forms.Form):
 
 class HealthForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+    age = forms.IntegerField()
     isMale = forms.BooleanField()
     isnotMale = forms.BooleanField()
     weight = forms.CharField(widget=forms.NumberInput(attrs={'class':'form-control'}))
     height = forms.CharField(widget=forms.NumberInput(attrs={'class':'form-control'}))
     isActive = forms.BooleanField()
     isnotActive = forms.BooleanField()
+    isModeratelyActive = forms.BooleanField()

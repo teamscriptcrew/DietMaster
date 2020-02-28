@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.http import *
-from .forms import RegisterForm
+from .forms import RegisterForm, HealthForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.template import RequestContext
-
+import joblib
+from sklearn.linear_model import LinearRegression
 def user_register(request):
     # if this is a POST request we need to process the form data
     template = 'dietmanager/register.html'
@@ -69,13 +70,32 @@ def login_user(request, message=""):
 				return HttpResponseRedirect('/health/')
 			else:
 				print("Not active user")
-		else:
-			print("Reached here")
+		else:request, "dietmanager/health.html"
 	return render(request, 'dietmanager/login.html', {message:"No such user found"})
 
 @login_required(login_url='/login/')
 def health(request):
 	return render(request, "dietmanager/health.html")
+
+def store(request,user="new"):
+    if request.POST:
+        forms = HealthForm()
+
+        forms.username = user.name
+        forms.age = request.POST["age"]
+        forms.weight = request.POST['weight']
+        forms.height = request.POST['height']
+        forms.is_active = request.POST['is_active']
+        forms.is_not_active = request.POST['is_not_active']
+        forms.is_modetately_active = request.POST['is_moderately_active']
+        forms.is_male = request.POST['is_male']
+        forms.is_female = request.POST['is_female']
+        forms.save()
+        print(forms)
+    else:
+        return render(request, "dietmanager/health.html")
+    return render(request, "dietmanager/main.html")
+
 
 @login_required(login_url='/login/')
 def main(request):
