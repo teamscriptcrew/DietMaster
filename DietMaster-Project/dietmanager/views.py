@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import *
-from .forms import RegisterForm, HealthForm
+from .forms import RegisterForm
+from .models import HealthModel
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -28,7 +29,7 @@ def user_register(request):
                 })
             elif form.cleaned_data['password'] != form.cleaned_data['password_repeat']:
                 return render(request, template, {
-                    'form': form,
+                    'form': forformsm,
                     'error_message': 'Passwords do not match.'
                 })
             else:
@@ -75,28 +76,56 @@ def login_user(request, message=""):
 
 @login_required(login_url='/login/')
 def health(request):
-	return render(request, "dietmanager/health.html")
-
-def store(request,user="new"):
+    try:
+        HealthModel.objects.get(username=current_user)
+    except:
+        return render(request, "dietmanager/home.html")
     if request.POST:
-        forms = HealthForm()
-
-        forms.username = user.name
+        forms = HealthModel()
+        current_user = request.user
+        forms.username = current_user
         forms.age = request.POST["age"]
         forms.weight = request.POST['weight']
         forms.height = request.POST['height']
-        forms.is_active = request.POST['is_active']
-        forms.is_not_active = request.POST['is_not_active']
-        forms.is_modetately_active = request.POST['is_moderately_active']
-        forms.is_male = request.POST['is_male']
-        forms.is_female = request.POST['is_female']
-        forms.save()
+        active = request.POST['is_active']
+        if(active=="Very_Active"):
+            forms.isActive = True
+            forms.isnotActive = False
+            forms.isModeratelyActive = False
+        elif(active=="Moderately_Active"):
+            forms.isActive = False
+            forms.isnotActive = False
+            forms.isModeratelyActive = True
+        else:
+            forms.isActive = False
+            forms.isnotActive = True
+            forms.isModeratelyActive = False
+        gender = request.POST["gender"]
+        if(gender=="Male"):
+            forms.isMale = True
+            forms.isFemale = False
+        else:
+            forms.isMale = False
+            forms.isFemale = True
+        try:
+            HealthModel.objects.get(username=current_user)
+        except:
+            forms.save()
+        else:
+            pass
         print(forms)
+        return render(request, "dietmanager/home.html")
     else:
-        return render(request, "dietmanager/health.html")
-    return render(request, "dietmanager/main.html")
+        return render(request, "dietmanager/health1.html")
 
+def store(request,user="new"):
+    print("HI")
+    
+    
 
 @login_required(login_url='/login/')
 def main(request):
-	return render(request, "dietmanager/main.html")
+    current_user = request.user
+    obj = HealthModel.objects.all()
+    print(obj.username)
+    return render(request, "dietmanager/home.html", {"user":current_user})
