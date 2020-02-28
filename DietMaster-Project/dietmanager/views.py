@@ -66,7 +66,7 @@ def login_user(request, message=""):
 		if user is not None:
 			if user.is_active:
 				login(request, user)
-				return HttpResponseRedirect('/main/')
+				return HttpResponseRedirect('/health/')
 			else:
 				print("Not active user")
 		else:
@@ -74,5 +74,9 @@ def login_user(request, message=""):
 	return render(request, 'dietmanager/login.html', {message:"No such user found"})
 
 @login_required(login_url='/login/')
+def health(request):
+	return render(request, "dietmanager/health.html")
+
+@login_required(login_url='/login/')
 def main(request):
-	return render(request, "dietmanager/logged_in.html")
+	return render(request, "dietmanager/main.html")
