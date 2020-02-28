@@ -45,15 +45,15 @@ White Oats,356,60,11,8
 Steel Oats,150,27,5,3
 Instant Oats,388,71,9,8
 Chappathi,72,16,3,2
-Chappathi,114,24,3,0
-Chappathi,72,16,3,0
-Chappathi,325,46,10,9
-chappathi,264,52,7,3
-Chappathi,98,16,3,2
-Chappathi,126,26,4,1
-Chappathi,72,20,4,3
-Roti Chappathi,105,17,4,0
-chappathi ,110,23,3,1
+Chappathi x2 ,114,24,3,0
+Chappathi x1 ,72,16,3,0
+Chappathi x5 ,325,46,10,9
+chappathi x4 ,264,52,7,3
+Chappathi x1 ,98,16,3,2
+Chappathi x2 ,126,26,4,1
+Chappathi x1 ,72,20,4,3
+Chappathi x2,105,17,4,0
+chappathi x2 ,110,23,3,1
 Rice,199,29,3,8
 Rice,160,36,3,1
 Rice,240,47,6,4
