@@ -1,3 +1,8 @@
+from sklearn.linear_model import LinearRegression
+import joblib
+from random import randint
+from pandas import DataFrame, read_csv
+lr = joblib.load("caloriemeter.pkl")
 from django.shortcuts import render
 from django.http import *
 from .forms import RegisterForm
@@ -11,7 +16,7 @@ from sklearn.linear_model import LinearRegression
 def user_register(request):
     # if this is a POST request we need to process the form data
     template = 'dietmanager/register.html'
-   
+
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = RegisterForm(request.POST)
@@ -43,10 +48,10 @@ def user_register(request):
                 user.last_name = form.cleaned_data['last_name']
                 user.phone_number = form.cleaned_data['phone_number']
                 user.save()
-               
+
                 # Login the user
                 login(request, user)
-               
+
                 # redirect to accounts page:
                 return HttpResponseRedirect('/login/')
 
@@ -74,13 +79,30 @@ def login_user(request, message=""):
 		else:request, "dietmanager/health.html"
 	return render(request, 'dietmanager/login.html', {message:"No such user found"})
 
+def getDiet(calories):
+    permeal = round(calories)//3
+    df = DataFrame(read_csv("foodData.csv"))
+    l2 = []
+    for j in range(3):
+        c = 0
+        l = []
+        while(permeal>c):
+            i = randint(0,100)
+            l.append(df["name"][i])
+            c += df["calories"][i]
+        l2.append(l)
+    return l2
+
 @login_required(login_url='/login/')
 def health(request):
+    current_user = request.user
     try:
         HealthModel.objects.get(username=current_user)
+        return render(request, "dietmanager/main.html")
     except:
-        return render(request, "dietmanager/home.html")
+        pass
     if request.POST:
+        print("POST")
         forms = HealthModel()
         current_user = request.user
         forms.username = current_user
@@ -108,24 +130,34 @@ def health(request):
             forms.isMale = False
             forms.isFemale = True
         try:
-            HealthModel.objects.get(username=current_user)
+            v=HealthModel.objects.get(username=current_user)
         except:
             forms.save()
-        else:
-            pass
-        print(forms)
-        return render(request, "dietmanager/home.html")
+            v = HealthModel.objects.get(username=current_user)
+        username=v.username
+        age=int(v.age)
+        ismale=int(v.isMale==True)
+        isfemale=int(v.isFemale==True)
+        weight=int(v.weight)
+        height=int(v.height)
+        isactive=int(v.isActive==True)
+        isnotactive=int(v.isnotActive==True)
+        ismoderate=int(v.isModeratelyActive==True)
+        lib=[age,ismale,isfemale,height, weight, isactive, isnotactive, ismoderate,0,0,0]
+        calories = lr.predict([lib])
+        l2 = joblib.load("calories_to_nutrients.pkl")
+        values = l2.predict(calories)
+        diet = getDiet(calories[0][0])
+        return render(request, "dietmanager/home.html",{"calories":calories[0][0],"carbs":values[0][0],"proteins":values[0][1],"fats":values[0][2],"diet":diet})
     else:
         return render(request, "dietmanager/health1.html")
-
+345.40499046046205
 def store(request,user="new"):
-    print("HI")
-    
-    
+    pass
+
 
 @login_required(login_url='/login/')
 def main(request):
     current_user = request.user
     obj = HealthModel.objects.all()
-    print(obj.username)
     return render(request, "dietmanager/home.html", {"user":current_user})

@@ -57,25 +57,19 @@ color:green;
   </tr>
   <tr>
     <td>{{ user }}</td>
-    <td>12</td>
-    <td>45</td>
-    <td>2</td>
-    <td>345</td>
-  </tr>
-  <tr>
-    <td>Arjun</td>
-    <td>10</td>
-    <td>34</td>
-    <td>4</td>
-    <td>457</td>
-  </tr>
-  <tr>
-    <td>Athul</td>
-    <td>7</td>
-    <td>39</td>
-    <td>9</td>
-    <td>557</td>
+    <td>{{ proteins }}</td>
+    <td>{{ carbs }}</td>
+    <td>{{ fats }}</td>
+    <td>{{ calories }}</td>
   </tr>
 </table>
+<div>
+	{% for i in diet %}
+		{% for k in i %}
+			{{ k }}
+			<br/>
+		{% endfor %}
+		<br/>
+	{% endfor %}
 </body>
 </html>
