@@ -10,7 +10,10 @@ class RegisterForm(forms.Form):
     phone_number = forms.CharField(widget=forms.NumberInput(attrs={'class':'form-control'}), required=False)
 
 class HealthForm(forms.Form):
-    gender = forms.BoolField(widget=forms.BoolInput(attrs={'class':'form-control'}))
+    username = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+    isMale = forms.BooleanField()
+    isnotMale = forms.BooleanField()
     weight = forms.CharField(widget=forms.NumberInput(attrs={'class':'form-control'}))
     height = forms.CharField(widget=forms.NumberInput(attrs={'class':'form-control'}))
-    Active = forms.BoolField(widget=forms.BoolInput(attrs={'class':'form-control'}))
+    isActive = forms.BooleanField()
+    isnotActive = forms.BooleanField()
