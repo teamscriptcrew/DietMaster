@@ -179,7 +179,7 @@ def health(request):
     current_user = request.user
     try:
         HealthModel.objects.get(username=current_user)
-        return render(request, "dietmanager/main.html")
+        return render(request, "dietmanager/home.html")
     except:
         pass
     if request.POST:
@@ -249,38 +249,61 @@ def health(request):
             return render(request, "dietmanager/health1.html")
 
 def store(request):
+
     user = request.user
+    v=HealthModel.objects.get(username=user)
+    
     st = StorageModel(username=user)
+    if(st is None):
+        st = StorageModel()
+        st.username = user
+        st.save()
+    print(st)
     if request.POST:
         if(st.daily_intake1==0):
+            st = StorageModel(username=user)
             daily_intake1 = int(request.POST['breakfast']) + int(request.POST["lunch"]) + int(request.POST["dinner"])
             st.daily_intake1 = daily_intake1
+            v.calories += (v.calories-daily_intake1)
+            v.save()
             st.save()
         elif(st.daily_intake2==0):
             daily_intake2 = int(request.POST['breakfast']) + int(request.POST["lunch"]) + int(request.POST["dinner"])
             st.daily_intake2 = daily_intake2
+            v.calories += (v.calories-daily_intake2)
+            v.save()
             st.save()
         elif(st.daily_intake3==0):
             daily_intake3 = int(request.POST['breakfast']) + int(request.POST["lunch"]) + int(request.POST["dinner"])
             st.daily_intake3 = daily_intake3
+            v.calories += (v.calories-daily_intake3)
             st.save()
+            v.save()
         elif(st.daily_intake4==0):
             daily_intake4 = int(request.POST['breakfast']) + int(request.POST["lunch"]) + int(request.POST["dinner"])
             st.daily_intake4 = daily_intake4
+            v.calories += (v.calories-daily_intake4)
             st.save()
+            v.save()
         elif(st.daily_intake5==0):
             daily_intake5 = int(request.POST['breakfast']) + int(request.POST["lunch"]) + int(request.POST["dinner"])
             st.daily_intake5 = daily_intake5
+            v.calories += (v.calories-daily_intake5)
             st.save()
+            v.save()
         elif(st.daily_intake6==0):
             daily_intake6 = int(request.POST['breakfast']) + int(request.POST["lunch"]) + int(request.POST["dinner"])
             st.daily_intake6 = daily_intake6
+            v.calories += (v.calories-daily_intake6)
             st.save()
+            v.save()
         elif(st.daily_intake7==0):
             daily_intake7 = int(request.POST['breakfast']) + int(request.POST["lunch"]) + int(request.POST["dinner"])
             st.daily_intake7 = daily_intake7
+            v.calories += (v.calories-daily_intake7)
             st.save()
-        return render(request, "dietmanager/home.html")
+            v.save()
+        return render(request, "dietmanager/home.html",{"calories":v.calories,"proteins":v.proteins,"carbs":v.carbs,"fats":v.fats})
     else:
         return render(request,"dietmanager/response.html")
 
