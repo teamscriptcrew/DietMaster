@@ -6,7 +6,7 @@ lr = joblib.load("caloriemeter.pkl")
 from django.shortcuts import render
 from django.http import *
 from .forms import RegisterForm
-from .models import HealthModel
+from .models import HealthModel, StorageModel
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -79,27 +79,41 @@ def login_user(request, message=""):
 		else:request, "dietmanager/health.html"
 	return render(request, 'dietmanager/login.html', {message:"No such user found"})
 
-def getDiet(calories):
-
-    # Make this better
-    
-    
-    
-    snacks=["pastry","biscuit","fries","chocolate","pasta","vada pav","sandwich"]
-    Drinks=["coffee","tea","milk","shake"]
+def getDiet(calories,diseases):
+    snacks=["Kuzhalappam","pastry","biscuit","fries","chocolate","pasta","vada pav","sandwich","noodles","Chicken Shawarma","Cheese Pizza","Pizza","Coconut Pudding","Tapioca Pudding","Vanilla Pudding","Chocolate Pudding","Cornbread Pudding"]
+    Drinks=["coffee","tea","milk","shake","Apple Juice","Pineapple Juice","Orange Juice"]
     others=["curd","yogurt","burger","peanuts"]
-    fruits=["banana","apple","grapes","carrots"]
-    curry=["fish","sambar","avial","stew","pork"]
-    permeal = round(calories)//3
+    fruits=["banana","apple","grapes","carrots","Watermelon"]
+    curry=["ayala curry","Matthi curry","Vegetable Khurma","Boiled Eggs","Vegetable Khurma","Gobi Manchurian","Gobi Fry","Butter Chicken","Pepper Chicken","Gobi Chicken","Crab Curry","Payar Curry","Cheese Paneer","Mango Pickle","Coconut Chutney","Kadala Curry","Egg Curry","Baby Spinach","Tomato","fish","sambar","avial","stew","pork","Aloo Gobi","Gobi Curry","Beef Curry","Paneer Curry","Fish Curry","Prawn Curry","Sweet Peas"]
+
+    permeal = calories/3
     df = DataFrame(read_csv("foodData.csv"))
     l2 = []
     f1 = []
     f2 = []
     f3 = []
+    f4 = []
 
-    
+    cholesterol=["cheese","burger","egg yolk","butter","chicken","cheese","ice cream"]
+    thyroid=["raw cabbage","raw cauliflower","gluten containing foods","junk foods","high- sugar","green-tea"]
+    diabetes=["sugar","oil,coconut(in moderation)","fried foods","mutton","parottas","snacks","soft drinks","egg yolk","salt(inlimit)","honey","dried fruits","mangoes","jackfruits"]
+    pcos=["biscuits","cakes","bread","dried fruits","ice cream","yogurt","soda","milk","cheese","butter","soy products","caffeine"]
+    hypertension=["maida","bread","noodles","pizza","burgers","chocolate","cakes","chips","coconut","milk","butter","achar"]
+
+    if(diseases=="Cholesterol"):
+        f4.append(cholesterol)
+    elif(diseases=="Thyroid"):
+        f4.append(thyroid)
+    elif(diseases=="Diabetes"):
+        f4.append(diabetes)
+    elif (diseases == "PCOS"):
+        f4.append(pcos)
+    elif (diseases == "Hypertension" ):
+        f4.append(hypertension)
+    else:
+        f4.append('')   
     def morn(permeal):
-        morning=["idli","dosa","puttu","oats","noodles","salad","bread","idiyappam","appam","ada","vada"]
+        morning=["Brown Bread","Kai pathiri","Malabar nice pathiri","Ada Dosa","Wheat Ada","Rice Rotti","Potato Rotti","idli","dosa","puttu","oats","salad","bread","idiyappam","appam","ada","vada","Poori","Methi Poori","Gobi Paratha"]
         df = DataFrame(read_csv("foodData.csv"))
         datas = []
         datas.append(df.loc[df['name'].isin(morning)])
@@ -115,7 +129,7 @@ def getDiet(calories):
         f1 = {"name":name, "count":count+1 ,"curry":ccurry}
         return f1
     def aftern(permeal):
-        afternoon=["Porotta","salad","rice","chappati"]
+        afternoon=["Cucumber Salad","Tomato Salad","Spinach Salad","Fresh fruit salad","Porotta","salad","rice","chappati","Chicken Biriyani","Beef Biriyani","Mutton Biriyani","Vegetable Biriyani"]
         df = DataFrame(read_csv("foodData.csv"))
         datas = []
         datas.append(df.loc[df['name'].isin(afternoon)])
@@ -131,7 +145,7 @@ def getDiet(calories):
         f1 = {"name":name, "count":count+1 ,"curry":ccurry}
         return f1
     def night(permeal):
-        night=["rice","pathiri","dosa","porotta","salad","rice","chappati"]
+        night=["Brown Bread","Cucumber Salad","Tomato Salad","Spinach Salad","Fresh fruit salad","Kai pathiri","Malabar nice pathiri","Rice Rotti","Potato Rotti","rice","pathiri","dosa","porotta","salad","rice","chappati","Chicken Biriyani","Beef Biriyani","Mutton Biriyani","Vegetable Biriyani","Poori","Methi Poori","Gobi Paratha"]
         df = DataFrame(read_csv("foodData.csv"))
         datas = []
         datas.append(df.loc[df['name'].isin(night)])
@@ -154,7 +168,7 @@ def getDiet(calories):
     l2.append(f1)
     l2.append(f2)
     l2.append(f3)
-
+    l2.append(f4)
 
     return l2
 
@@ -176,7 +190,7 @@ def health(request):
         forms.weight = request.POST['weight']
         forms.height = request.POST['height']
         active = request.POST['is_active']
-        diseases = request.POST['diseases']
+        forms.diseases = request.POST['diseases']
         if(active=="Very_Active"):
             forms.isActive = True
             forms.isnotActive = False
@@ -200,7 +214,7 @@ def health(request):
             v=HealthModel.objects.get(username=current_user)
         except:
             forms.save()
-            v = HealthModel.objects.get(username=current_user)
+            v=HealthModel.objects.get(username=current_user)
         username=v.username
         age=int(v.age)
         ismale=int(v.isMale==True)
@@ -216,17 +230,60 @@ def health(request):
         l2 = joblib.load("calories_to_nutrients.pkl")
         values = l2.predict(calories)
         c = calories[0][0]
-        diet = getDiet(c)
-        return render(request, "dietmanager/home.html",{"calories":calories[0][0],"carbs":values[0][0],"proteins":values[0][1],"fats":values[0][2],"diet":diet})
-    # if(request.GET.get('btn')):
-    #     current_user = request.user
-    #     diet = getDiet(current_user.calories)
-    #     return render(request, "dietmanager/home.html",{"diet":diet})    
+        v.calories = c
+        v.carbs = values[0][0]
+        v.proteins = values[0][1]
+        v.fats = values[0][2]
+        print(v.diseases)
+        diet = getDiet(c,v.diseases)[:-1]
+        avoidables = getDiet(c,v.diseases)[-1]
+        v.diet = diet
+        v.save()
+        return render(request, "dietmanager/home.html",{"calories":calories[0][0],"carbs":values[0][0],"proteins":values[0][1],"fats":values[0][2],"diet":diet,"avoidable":avoidables})
     else:
-        return render(request, "dietmanager/health1.html")
+        current_user = request.user
+        try:
+            v = HealthModel.objects.get(username=current_user)
+            return render(request, "dietmanager/home.html",{"calories":v.calories,"carbs":v.carbs,"proteins":v.proteins,"fats":v.fats,"diet":v.diet})
+        except:
+            return render(request, "dietmanager/health1.html")
 
-def store(request,user="new"):
-    return render(request,"dietmanager/getdiet.html")
+def store(request):
+    user = request.user
+    st = StorageModel(username=user)
+    if request.POST:
+        if(st.daily_intake1==0):
+            daily_intake1 = int(request.POST['breakfast']) + int(request.POST["lunch"]) + int(request.POST["dinner"])
+            st.daily_intake1 = daily_intake1
+            st.save()
+        elif(st.daily_intake2==0):
+            daily_intake2 = int(request.POST['breakfast']) + int(request.POST["lunch"]) + int(request.POST["dinner"])
+            st.daily_intake2 = daily_intake2
+            st.save()
+        elif(st.daily_intake3==0):
+            daily_intake3 = int(request.POST['breakfast']) + int(request.POST["lunch"]) + int(request.POST["dinner"])
+            st.daily_intake3 = daily_intake3
+            st.save()
+        elif(st.daily_intake4==0):
+            daily_intake4 = int(request.POST['breakfast']) + int(request.POST["lunch"]) + int(request.POST["dinner"])
+            st.daily_intake4 = daily_intake4
+            st.save()
+        elif(st.daily_intake5==0):
+            daily_intake5 = int(request.POST['breakfast']) + int(request.POST["lunch"]) + int(request.POST["dinner"])
+            st.daily_intake5 = daily_intake5
+            st.save()
+        elif(st.daily_intake6==0):
+            daily_intake6 = int(request.POST['breakfast']) + int(request.POST["lunch"]) + int(request.POST["dinner"])
+            st.daily_intake6 = daily_intake6
+            st.save()
+        elif(st.daily_intake7==0):
+            daily_intake7 = int(request.POST['breakfast']) + int(request.POST["lunch"]) + int(request.POST["dinner"])
+            st.daily_intake7 = daily_intake7
+            st.save()
+        return render(request, "dietmanager/home.html")
+    else:
+        return render(request,"dietmanager/response.html")
+
 
 
 @login_required(login_url='/login/')

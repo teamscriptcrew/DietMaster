@@ -1,0 +1,8 @@
+How much calories did you take yesterday:<br><br>
+<form action="{{ store }}"" method="POST">
+    {% csrf_token %}
+    BreakFast:<input id="breakfast" name="breakfast" required></input><br><br>
+    Lunch:<input id="lunch" name="lunch" required></input><br><br>
+    Dinner:<input id="dinner" name=dinner required></input><br><br>
+    <input value="submit" id="btn" name="btn" type="submit"/>
+</form>

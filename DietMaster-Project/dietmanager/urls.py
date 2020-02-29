@@ -10,4 +10,7 @@ urlpatterns = [
     url(r'^store/$', views.store, name="store"),
     url(r'^getdiet/$', views.getDiet, name="getdiet"),
     url(r'^track/$',views.store, name="track"),
+    url(r'^getdiet/$',views.getDiet, name="getdiet"),
+    url(r'^response/$',views.store,name="response"),
+
 ]
