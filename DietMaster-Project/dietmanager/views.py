@@ -82,51 +82,82 @@ def login_user(request, message=""):
 def getDiet(calories):
 
     # Make this better
-    morning=["idli","dosa","puttu","oats","noodles","salad","bread","sandwich","idiyappam","appam","ada","vada"]
-    afternoon=["fish","porotta","pork","salad","rice"]
-    night=["fish","porotta","pork","noodles","salad","rice"]
-    snacks=["pastry","biscuit","fries","chocolate","pasta","vada pav"]
+    
+    
+    
+    snacks=["pastry","biscuit","fries","chocolate","pasta","vada pav","sandwich"]
     Drinks=["coffee","tea","milk","shake"]
     others=["curd","yogurt","burger","peanuts"]
     fruits=["banana","apple","grapes","carrots"]
-    curry=["sambar","avial","stew"]
+    curry=["fish","sambar","avial","stew","pork"]
     permeal = round(calories)//3
     df = DataFrame(read_csv("foodData.csv"))
     l2 = []
     f1 = []
     f2 = []
     f3 = []
-    for j in range(3):
-        c = 0
-        l = []
-        #i = randint(0,100)
-        while(permeal>c):
-            i = randint(0,100)
 
-            # After editing the csv file, replace the mornings with afternoon and night respectievely at j=1 and j=2
-            if(j==0):
-                datas = []
-                datas.append(df.loc[df['name'].isin(morning)])
-                x = randint(0,len(datas[0])-1)
-                calories = datas[0].iloc[x]["calories"]
-                c += calories
-                f1.append(datas[0].iloc[x]["name"])
-            elif(j==1):
-                datas = []
-                datas.append(df.loc[df["name"].isin(morning)])
-                x = randint(0,len(datas[0])-1)
-                c += datas[0].iloc[x]["calories"]
-                f2.append(datas[0].iloc[x]["name"])
-            elif(j==2):
-                datas = []
-                datas.append(df.loc[df["name"].isin(morning)])
-                x = randint(0, len(datas[0])-1)
-                c += datas[0].iloc[x]["calories"]
-                f3.append(datas[0].iloc[x]["name"])
+    
+    def morn(permeal):
+        morning=["idli","dosa","puttu","oats","noodles","salad","bread","idiyappam","appam","ada","vada"]
+        df = DataFrame(read_csv("foodData.csv"))
+        datas = []
+        datas.append(df.loc[df['name'].isin(morning)])
+        x = randint(0,len(datas[0])-1)
+        calories = datas[0].iloc[x]["calories"]
+        name = (datas[0].iloc[x]["name"])
+        c1 = calories
+        count = -1
+        while( c1 <= permeal):
+            c1 += calories
+            count+=1
+        ccurry = curry[randint(0,len(curry)-1)]
+        f1 = {"name":name, "count":count+1 ,"curry":ccurry}
+        return f1
+    def aftern(permeal):
+        afternoon=["Porotta","salad","rice","chappati"]
+        df = DataFrame(read_csv("foodData.csv"))
+        datas = []
+        datas.append(df.loc[df['name'].isin(afternoon)])
+        x = randint(0,len(datas[0])-1)
+        calories = datas[0].iloc[x]["calories"]
+        name = (datas[0].iloc[x]["name"])
+        c1 = calories
+        count = -1
+        while( c1 <= permeal):
+            c1 += calories
+            count+=1
+        ccurry = curry[randint(0,len(curry)-1)]
+        f1 = {"name":name, "count":count+1 ,"curry":ccurry}
+        return f1
+    def night(permeal):
+        night=["rice","pathiri","dosa","porotta","salad","rice","chappati"]
+        df = DataFrame(read_csv("foodData.csv"))
+        datas = []
+        datas.append(df.loc[df['name'].isin(night)])
+        x = randint(0,len(datas[0])-1)
+        calories = datas[0].iloc[x]["calories"]
+        name = (datas[0].iloc[x]["name"])
+        c1 = calories
+        count = -1
+        while( c1 <= permeal):
+            c1 += calories
+            count+=1
+        ccurry = curry[randint(0,len(curry)-1)]
+        f1 = {"name":name, "count":count+1 ,"curry":ccurry}
+        return f1
+
+    f1 = morn(permeal)
+    f2 = aftern(permeal)
+    f3 = night(permeal)
+
     l2.append(f1)
     l2.append(f2)
     l2.append(f3)
+
+
     return l2
+
 
 
 @login_required(login_url='/login/')
@@ -180,17 +211,22 @@ def health(request):
         isnotactive=int(v.isnotActive==True)
         ismoderate=int(v.isModeratelyActive==True)
         lib=[age,ismale,isfemale,height, weight, isactive, isnotactive, ismoderate,0,0,0]
+        global c
         calories = lr.predict([lib])
         l2 = joblib.load("calories_to_nutrients.pkl")
         values = l2.predict(calories)
         c = calories[0][0]
         diet = getDiet(c)
         return render(request, "dietmanager/home.html",{"calories":calories[0][0],"carbs":values[0][0],"proteins":values[0][1],"fats":values[0][2],"diet":diet})
+    # if(request.GET.get('btn')):
+    #     current_user = request.user
+    #     diet = getDiet(current_user.calories)
+    #     return render(request, "dietmanager/home.html",{"diet":diet})    
     else:
         return render(request, "dietmanager/health1.html")
-345.40499046046205
+
 def store(request,user="new"):
-    pass
+    return render(request,"dietmanager/getdiet.html")
 
 
 @login_required(login_url='/login/')
@@ -198,3 +234,4 @@ def main(request):
     current_user = request.user
     obj = HealthModel.objects.all()
     return render(request, "dietmanager/home.html", {"user":current_user})
+

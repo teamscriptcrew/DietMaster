@@ -8,5 +8,6 @@ urlpatterns = [
     url(r'^login/$', views.login_user, name="login_user"),
     url(r'^health/$', views.health, name="health"),
     url(r'^store/$', views.store, name="store"),
-    url(r'^getdiet/$', views.getDiet, name="getdiet")
+    url(r'^getdiet/$', views.getDiet, name="getdiet"),
+    url(r'^track/$',views.store, name="track"),
 ]

@@ -42,11 +42,11 @@ color:green;
 }
 </style>
 </head>
-<body>
-<center><b><h1>Welcome!</b></h1>
+<b><h1>Welcome!</b></h1>
 <br>
 <br>
 <i id="details">Your details are shown below..</i><br><br><br>
+</br></br>
 <table id="customers">
   <tr>
     <th>User</th>
@@ -63,13 +63,24 @@ color:green;
     <td>{{ calories }}</td>
   </tr>
 </table>
-<div>
-	{% for i in diet %}
-		{% for k in i %}
-			{{ k }}
-			<br/>
-		{% endfor %}
-		<br/>
-	{% endfor %}
+</br></br>
+<h2>Your diet plan: </h2></br></br>
+<table id="customers">
+  <tr>
+    <th>Item</th>
+    <th>Count</th>
+    <th>Curry</th>
+    <th>Refresh</th>
+  </tr>
+  
+  {% for i in diet %}
+    <tr>
+      {% for j in i.values %}
+        <td>{{ j }}</td>
+      {% endfor %}
+      <td><form  method="get" action=#><input value=" " type="submit" id="btn" name="btn"></form></td>
+    </tr>
+  {% endfor %}
+</table>
 </body>
 </html>

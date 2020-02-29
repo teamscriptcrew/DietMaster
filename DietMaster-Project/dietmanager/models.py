@@ -11,3 +11,10 @@ class HealthModel(models.Model):
     isActive = models.BooleanField()
     isnotActive = models.BooleanField()
     isModeratelyActive = models.BooleanField()
+    diseases = models.CharField(max_length=30,default=None)
+    calories = models.FloatField(default=0)
+
+class StorageModel(models.Model):
+    username = models.CharField(max_length=30,unique=True)
+    diet = models.CharField(max_length=300)
+    to_eat = models.IntegerField(default=0)
