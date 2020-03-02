@@ -1,0 +1,221 @@
+name,calories,carbs,proteins,fats
+Dosa,175,4,7,15
+Dosa,80,15,2,2
+Idli,260,0,0,0
+Idli,69,15,1,0
+Idli,39,8,2,0
+Idli,130,20,5,3
+Idli,157,15,1,1
+Idli,110,23,4,0
+idli,65,12,2,1
+Puttu,143,30,3,1
+Puttu,133,27,5,1
+Puttu,392,73,8,8
+puttu,370,81,7,2
+Fish,139,0,26,3
+Pathiri,376,70,6,8
+Pathiri,8,2,0,0
+Pathiri,204,45,3,1
+Appam,165,38,3,0
+Porotta,190,25,4,9
+Porotta,376,77,10,7
+Porotta,118,24,4,1
+Porotta,376,77,10,7
+Porotta,369,70,10,5
+Porotta,480,80,11,13
+Porotta,410,77,11,6
+Pork,140,1,12,9
+Pork,260,0,28,16
+Noodles,200,41,7,1
+Noodles,190,26,4,7
+Noodles,190,26,4,7
+Noodles,40,6,2,1
+Noodles,360,78,7,1
+Noodles,10,3,0,1
+Noodles,290,60,10,2
+Salad,15,3,1,0
+Salad,160,13,3,12
+Salad,200,10,5,14
+Salad,150,15,3,9
+Salad,350,32,42,9
+Salad,20,3,2,0
+Salad,200,7,6,16
+Sambar,152,26,11,1
+Sambar,159,26,11,1
+Sambar,50,8,1,2
+Sambar,110,8,4,7
+Sambar,110,0,0,0
+Sambar,169,25,6,7
+sambar,340,63,22,2
+Sambar Rice,210,30,6,6
+Dosa Sambar,363,63,8,8
+Pastry,180,17,3,10
+Pastry,100,20,1,2
+Pastry,174,34,2,5
+pastry,307,63,9,2
+Pastry,161,2,2,3
+Banana,89,23,1,0
+Apple,52,14,0,0
+Apple,80,30,0,0
+Apple,50,13,0,0
+Apple,80,22,0,0
+Apple,52,14,0,0
+Apple,52,14,0,0
+Apple,18,5,0,0
+Grapes,64,17,6,0
+Grapes,62,16,1,0
+Grapes,48,12,0,1
+Green,104,27,1,0
+Grapes,67,17,1,0
+Biscuit,53,9,1,2
+Biscuit,216,28,4,10
+Biscuit,210,28,5,9
+Biscuit,282,34,6,15
+Biscuit,54,7,1,3
+Biscuit,110,12,2,5
+Biscuit,215,28,4,10
+Biscuit,53,7,1,2
+Fries,110,20,2,3
+Fries,110,19,2,3
+Fries,380,48,4,19
+Fries,150,18,2,8
+Fries,340,49,4,15
+Fries,310,40,4,15
+Fries,230,29,3,11
+Fries,489,57,5,27
+Fries,230,29,3,11
+Coffee,1,0,0,0
+Coffee,5,0,0,0
+Coffee,85,14,0,2
+Coffee,310,46,5,12
+Coffee,5,0,0,0
+Coffee,10,1,1,1
+Coffee,50,1,0,5
+Tea,50,0,1,1
+Tea,70,18,0,0
+Tea,50,12,0,0
+Tea,50,4,0,0
+Bread,231,48,8,1
+Bread,80,15,2,2
+Bread,120,22,4,2
+Bread,63,12,3,0
+Bread,90,17,3,1
+Bread,90,15,4,2
+Bread,90,16,3,3
+Bread,80,14,3,1
+Bread,200,35,4,6
+Bread,100,19,4,1
+Milk,150,12,8,8
+Milk,100,12,8,3
+Milk,120,18,12,0
+Milk,163,12,10,9
+Milk,130,12,8,5
+milk,130,13,10,5
+Yogurt,80,14,5,0
+Yogurt,100,20,5,0
+Yogurt,60,4,8,2
+Yogurt,50,8,2,2
+Yogurt,131,19,4,4
+Yogurt,100,15,4,3
+Yogurt,131,19,4,4
+Curd,108,2,7,8
+Curd,90,4,10,4
+Curd,56,4,4,3
+Curd,61,5,4,3
+Curd,64,6,4,3
+Curd,43,5,3,2
+Burger,420,0,25,35
+Burger,290,0,19,23
+Burger,420,27,19,16
+Burger,210,0,13,18
+Burger,270,6,17,20
+Burger,356,0,24,28
+Burger,290,0,20,23
+Burger,130,0,21,4
+Shake,200,15,25,3
+Shake,120,11,11,4
+Shake,180,24,10,6
+Shake,180,30,9,2
+Shake,220,24,24,3
+Shake,150,17,17,2
+Shake,90,7,12,1
+Shake,44,1,10,0
+Shake,110,9,15,2
+Sandwich,474,18,61,16
+Sandwich,265,40,24,16
+Sandwich,700,0,0,0
+Sandwich,302,29,23,11
+Sandwich,300,42,16,7
+Beer,170,17,0,0
+Beer,147,11,1,0
+Beer,136,11,0,0
+Beer,149,12,0,0
+Beer,144,13,2,0
+Beer,140,8,0,0
+Beer,143,10,2,0
+Beer,160,39,2,0
+Beer,150,0,0,0
+Beer,148,0,0,0
+Idiyappam,45,10,1,0
+Idiyappam,130,30,2,0
+Idiyappam,69,15,1,2
+Idiyappam,360,84,7,0
+Idiyappam,145,31,4,0
+idiyappam,369,82,7,1
+Idiyappam,130,29,1,1
+Pal Appam,27,0,0,0
+Idi Appam,85,15,1,3
+Appam,222,25,3,12
+Stew,177,15,21,4
+Meatball Stew,180,24,15,2
+Veggie Stew,408,24,17,27
+Hamburger Stew,100,0,0,0
+Tuna Stew,248,15,2,20
+Beef Stew,156,15,14,5
+Stew Beef,411,40,38,12
+Bean Stew,344,0,32,7
+Carrots,41,10,1,0
+Carrots,27,6,1,0
+Carrots,20,5,0,0
+Carrots,47,0,0,0
+Mushroom20,3,3,0
+Mushroom,129,4,2,10
+Mushroom,90,9,1,6
+Mushroom,22,4,2,0
+Mushroom,125,0,0,0
+Chocolate,180,29,1,9
+Chocolate,133,15,2,7
+Chocolate,160,17,17,2
+Chocolate,130,9,2,9
+Ada Pradhaman,453,69,0,20
+Banana,60,15,0,0
+Ada,554,113,6,10
+pasta 9,361,78,11,1
+Beans,80,15,7,0
+Vada,100,19,5,1
+Vada,334,43,14,11
+Avial,110,8,2,8
+Avial,183,32,6,11
+Avial,160,0,4,7
+Avial,110,12,2,6
+Avial,65,12,2,1
+Avial,196,23,5,10
+Peanuts,567,16,26,49
+peanut,160,5,9,17
+Peanut,105,9,4,6
+Peanut,116,4,4,10
+Peanut,40,1,2,3
+Peanut,10,2,0,1
+Chicken Biriyani,200,57,12,19
+Beef Biriyani,349,48,7,21
+Mutton Biriyani,651,81,24,32
+Vegetable Biriyani,397,50,16,10
+Poori,321,50,10,8
+Methi Poori,138,20,5,4
+Gobi Paratha,260,30,12,8
+Aloo Gobi,300,38,10,8
+Gobi Curry,119,6,9,4
+Beef Curry,346,12,20,37
+Paneer Curry,108,6,7,5
+Fish Curry,95,12,4,18
+Prawn Curry,150,20,2,3
