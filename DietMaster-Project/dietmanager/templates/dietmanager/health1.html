@@ -47,7 +47,7 @@ div {
 <center><h1>Health</h1></center>
 <center>
 <div class="mainf">
-  <form action="{{ store }}" method=POST>
+  <form action="{{ store }}" method="POST">
     {% csrf_token %}
     <label for="height">Height</label>
     <input type="text" class="height" name="height" placeholder="Your Height in cm" required>
