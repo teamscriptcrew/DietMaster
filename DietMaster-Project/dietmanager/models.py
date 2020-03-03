@@ -19,7 +19,11 @@ class HealthModel(models.Model):
     diet = models.CharField(max_length=30,default="None")
 
 class StorageModel(models.Model):
+<<<<<<< HEAD
     username = models.CharField(max_length=30,unique=True)
+=======
+    username = models.ForeignKey('HealthModel',on_delete=models.CASCADE)
+>>>>>>> c9571e9efb999ea6a2705fad49cee69ab2b3747a
     daily_intake1 = models.IntegerField(default=0,unique=False)
     daily_intake2 = models.IntegerField(default=0,unique=False)
     daily_intake3 = models.IntegerField(default=0,unique=False)
