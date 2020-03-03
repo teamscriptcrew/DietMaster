@@ -4,6 +4,10 @@ This app is used to predict the diet that you should follow according to your he
 
 Currently under development!
 
+# Installing dependencies
+```
+pip install -r requirements.txt
+```
 
 # Running locally
 ```
