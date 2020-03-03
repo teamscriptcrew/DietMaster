@@ -5,4 +5,4 @@
 * [Hari D](https://github.com/haridinesh00)
 * [Jijin K Haridas](https://github.com/jijinkh)
 * [Nitya Prakash](https://github.com/nityaprakash10)
-* [Subhagaha](https://github.com/SubaghaBose)
+* [Subagha](https://github.com/SubaghaBose)
