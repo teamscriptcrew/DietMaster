@@ -42,11 +42,11 @@ color:green;
 }
 </style>
 </head>
-<body>
-<center><b><h1>Welcome!</b></h1>
+<b><h1>Welcome!</b></h1>
 <br>
 <br>
-<i id="details">Your details are shown below..</i><br><br><br>
+<h2><i id="details">Your details are shown below..</i><br><br><br></h2>
+</br></br>
 <table id="customers">
   <tr>
     <th>User</th>
@@ -57,25 +57,37 @@ color:green;
   </tr>
   <tr>
     <td>{{ user }}</td>
-    <td>12</td>
-    <td>45</td>
-    <td>2</td>
-    <td>345</td>
-  </tr>
-  <tr>
-    <td>Arjun</td>
-    <td>10</td>
-    <td>34</td>
-    <td>4</td>
-    <td>457</td>
-  </tr>
-  <tr>
-    <td>Athul</td>
-    <td>7</td>
-    <td>39</td>
-    <td>9</td>
-    <td>557</td>
+    <td>{{ proteins }}</td>
+    <td>{{ carbs }}</td>
+    <td>{{ fats }}</td>
+    <td>{{ calories }}</td>
   </tr>
 </table>
+</br></br>
+<h2>Your diet plan: </h2></br></br>
+<table id="customers">
+  <tr>
+    <th>Item</th>
+    <th>Count</th>
+    <th>Curry</th>
+  </tr>
+  
+  {% for i in diet %}
+    <tr>
+      {% for j in i.values %}
+        <td>{{ j }}</td>
+      {% endfor %}
+    </tr>
+  {% endfor %}
+</table>
+<br><br><br><br>
+<div>
+  <h4>Kindly avoid these foods:</h4><br>
+  {% for i in avoidable %}
+    {% for j in i %}
+      {{ j }}
+    {% endfor %}
+  {% endfor %}
+</div>
 </body>
 </html>
