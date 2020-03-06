@@ -16,18 +16,7 @@ class HealthModel(models.Model):
     proteins = models.FloatField(default=0)
     fats = models.FloatField(default=0)
     carbs = models.FloatField(default=0)
-    diet = models.CharField(max_length=30,default="None")
 
 class StorageModel(models.Model):
-<<<<<<< HEAD
-    username = models.CharField(max_length=30,unique=True)
-=======
     username = models.ForeignKey('HealthModel',on_delete=models.CASCADE)
->>>>>>> c9571e9efb999ea6a2705fad49cee69ab2b3747a
-    daily_intake1 = models.IntegerField(default=0,unique=False)
-    daily_intake2 = models.IntegerField(default=0,unique=False)
-    daily_intake3 = models.IntegerField(default=0,unique=False)
-    daily_intake4 = models.IntegerField(default=0,unique=False)
-    daily_intake5 = models.IntegerField(default=0,unique=False)
-    daily_intake6 = models.IntegerField(default=0,unique=False)
-    daily_intake7 = models.IntegerField(default=0,unique=False)
+    calories_to_take = models.IntegerField(default=0,unique=False)

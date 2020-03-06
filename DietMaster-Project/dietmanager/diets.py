@@ -1,8 +1,8 @@
 def getDiet(calories,diseases):
     from pandas import DataFrame, read_csv
-    from random import randint
 
     df = DataFrame(read_csv("foodData.csv"))
+    permeal = calories/3
 
     # snacks=["Kuzhalappam","pastry","biscuit","fries","chocolate","pasta","vada pav","sandwich","noodles","Chicken Shawarma","Cheese Pizza","Pizza","Coconut Pudding","Tapioca Pudding","Vanilla Pudding","Chocolate Pudding","Cornbread Pudding"]
     # Drinks=["coffee","tea","milk","shake","Apple Juice","Pineapple Juice","Orange Juice"]
@@ -10,7 +10,7 @@ def getDiet(calories,diseases):
     # fruits=["banana","apple","grapes","carrots","Watermelon"]
     # curry=["ayala curry","Matthi curry","Vegetable Khurma","Boiled Eggs","Vegetable Khurma","Gobi Manchurian","Gobi Fry","Butter Chicken","Pepper Chicken","Gobi Chicken","Crab Curry","Payar Curry","Cheese Paneer","Mango Pickle","Coconut Chutney","Kadala Curry","Egg Curry","Baby Spinach","Tomato","fish","sambar","avial","stew","pork","Aloo Gobi","Gobi Curry","Beef Curry","Paneer Curry","Fish Curry","Prawn Curry","Sweet Peas"]
 
-    # permeal = calories/3
+    
     
     # l2 = []
     # f1 = []
