@@ -133,14 +133,10 @@ def health(request):
         calories = lr.predict([lib])
         l2 = joblib.load("calories_to_nutrients.pkl")
         values = l2.predict(calories)
-        c = calories[0][0]
-        v.calories = c
+        v.calories = calories[0][0]
         v.carbs = values[0][0]
         v.proteins = values[0][1]
         v.fats = values[0][2]
-        # diet = getDiet(c,v.diseases)[:-1]
-        # avoidables = getDiet(c,v.diseases)[-1]
-        v.diet = "diet"
         v.save()
         return render(request, "dietmanager/home.html",{"calories":calories[0][0],"carbs":values[0][0],"proteins":values[0][1],"fats":values[0][2],"diet":"diet","avoidable":"avoidables"})
     else:
@@ -150,76 +146,6 @@ def health(request):
         except:
             return render(request, "dietmanager/health1.html")
 
-# To store the changed values of calories each day for a period of 7 days
-def store(request):
-
-    user = request.user
-    v=HealthModel.objects.get(username=user)
-    
-    st = StorageModel(username=v)
-    if(st is None):
-        st = StorageModel()
-        st.username = user
-        st.save()
-    print(st)
-    if request.POST:
-        if(st.daily_intake1==0):
-            st = StorageModel(username=v)
-            daily_intake1 = int(request.POST['breakfast']) + int(request.POST["lunch"]) + int(request.POST["dinner"])
-            st.daily_intake1 = daily_intake1
-            x = (v.calories-daily_intake1)
-            v.calories += x
-            v.save()
-            st.save()
-        elif(st.daily_intake2==0):
-            daily_intake2 = int(request.POST['breakfast']) + int(request.POST["lunch"]) + int(request.POST["dinner"])
-            st.daily_intake2 = daily_intake2
-            x = (v.calories-daily_intake2)
-            v.calories += x
-
-            v.save()
-            st.save()
-        elif(st.daily_intake3==0):
-            daily_intake3 = int(request.POST['breakfast']) + int(request.POST["lunch"]) + int(request.POST["dinner"])
-            st.daily_intake3 = daily_intake3
-            x = (v.calories-daily_intake3)
-            v.calories += x
-            st.save()
-            v.save()
-        elif(st.daily_intake4==0):
-            daily_intake4 = int(request.POST['breakfast']) + int(request.POST["lunch"]) + int(request.POST["dinner"])
-            st.daily_intake4 = daily_intake4
-            x = (v.calories-daily_intake4)
-            v.calories += x
-            st.save()
-            v.save()
-        elif(st.daily_intake5==0):
-            daily_intake5 = int(request.POST['breakfast']) + int(request.POST["lunch"]) + int(request.POST["dinner"])
-            st.daily_intake5 = daily_intake5
-            x = (v.calories-daily_intake5)
-            v.calories += x
-            st.save()
-            v.save()
-        elif(st.daily_intake6==0):
-            daily_intake6 = int(request.POST['breakfast']) + int(request.POST["lunch"]) + int(request.POST["dinner"])
-            st.daily_intake6 = daily_intake6
-            x = (v.calories-daily_intake6)
-            v.calories += x
-            st.save()
-            v.save()
-        elif(st.daily_intake7==0):
-            daily_intake7 = int(request.POST['breakfast']) + int(request.POST["lunch"]) + int(request.POST["dinner"])
-            st.daily_intake7 = daily_intake7
-            x = (v.calories-daily_intake7)
-            v.calories += x
-            st.save()
-            v.save()
-        diet = getDiet(v.calories, v.diseases)
-        return render(request, "dietmanager/home.html",{"calories":v.calories,"proteins":v.proteins,"carbs":v.carbs,"fats":v.fats,"diet":diet})
-    else:
-        return render(request,"dietmanager/response.html")
-
-
 
 # On Progress
 @login_required(login_url='/login/')
@@ -228,3 +154,27 @@ def main(request):
     obj = HealthModel.objects.all()
     return render(request, "dietmanager/home.html", {"user":current_user})
 
+
+
+
+def getFood(request):
+    from pandas import DataFrame, read_csv
+    df = DataFrame(read_csv("foodData.csv"))
+
+    user = request.user
+    h = HealthModel.objects.get(username=user)
+    st = StorageModel(username=h)
+
+    k = df['name']
+    k = set((list(k)))
+    if request.POST:
+        food_item = request.POST['fooditem']
+        calories = df.loc[df['name'].isin([food_item])]
+        cals = calories.iloc[0]['calories']
+        print(cals)
+        st.calories_to_take = h.calories - cals
+        st.save()
+        return render(request, "dietmanager/home.html",{"calories":h.calories,"proteins":h.proteins,"carbs":h.carbs,"fats":h.fats})
+
+    else:
+        return render(request, 'dietmanager/getdiet.html', {"k":k})
