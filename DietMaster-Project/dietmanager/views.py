@@ -11,6 +11,7 @@ from django.template import RequestContext
 import joblib
 from sklearn.linear_model import LinearRegression
 from .diets import getDiet
+from annoying.functions import get_object_or_None
 
 lr = joblib.load("caloriemeter.pkl")
 # To register the user
@@ -35,7 +36,7 @@ def user_register(request):
                 })
             elif form.cleaned_data['password'] != form.cleaned_data['password_repeat']:
                 return render(request, template, {
-                    'form': forformsm,
+                    'form': form,
                     'error_message': 'Passwords do not match.'
                 })
             else:
@@ -155,25 +156,33 @@ def main(request):
     return render(request, "dietmanager/home.html", {"user":current_user})
 
 
-
-
+# Takes the food details 
+# Calculates the amount of nutrient intake and store it in a db
 def getFood(request):
     from pandas import DataFrame, read_csv
     df = DataFrame(read_csv("foodData.csv"))
 
     user = request.user
-    h = HealthModel.objects.get(username=user)
-    st = StorageModel(username=h)
-
+    h = get_object_or_None(HealthModel, username=user)
+    if not h:
+        return render(request, 'dietmanager/getdiet.html', {"k":k})
+    st = get_object_or_None(StorageModel, username=h)
+    if not st:
+        new_st = StorageModel()
+        new_st.username = h
+        new_st.save()
     k = df['name']
     k = set((list(k)))
     if request.POST:
         food_item = request.POST['fooditem']
         calories = df.loc[df['name'].isin([food_item])]
-        cals = calories.iloc[0]['calories']
-        print(cals)
-        st.calories_to_take = h.calories - cals
-        st.save()
+        quantity = request.POST['quantity']
+        cals = calories.iloc[0]['calories'] * int(quantity)
+
+        st.calories_to_take = (h.calories + st.calories_to_take) - cals
+
+        st.save() 
+
         return render(request, "dietmanager/home.html",{"calories":h.calories,"proteins":h.proteins,"carbs":h.carbs,"fats":h.fats})
 
     else:

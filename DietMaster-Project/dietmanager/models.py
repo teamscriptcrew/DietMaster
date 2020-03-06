@@ -18,5 +18,5 @@ class HealthModel(models.Model):
     carbs = models.FloatField(default=0)
 
 class StorageModel(models.Model):
-    username = models.ForeignKey('HealthModel',on_delete=models.CASCADE)
+    username = models.OneToOneField('HealthModel',unique=True,on_delete=models.CASCADE)
     calories_to_take = models.IntegerField(default=0,unique=False)
