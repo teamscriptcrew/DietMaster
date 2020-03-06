@@ -1,71 +1,79 @@
 <html>
 <head>
 <style>
-body {
-  background-image: url("https://envato-shoebox-0.imgix.net/4ed0/80f1-e534-4b02-9cc2-e2f852cd58ce/back_b261.jpg?auto=compress%2Cformat&fit=max&mark=https%3A%2F%2Felements-assets.envato.com%2Fstatic%2Fwatermark2.png&markalign=center%2Cmiddle&markalpha=18&w=1000&s=e618a4dd65bcb7389db840fd2f7c15ab");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size:cover;
-  width:100%;
-  height:100%;
-}
-h1{
-font-family: "Times New Roman", Times, serif;
-}
-#details:hover{
-color:green;
-}
-#customers {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  width: 80%;
-}
+  body {
+    background-image: url("https://envato-shoebox-0.imgix.net/4ed0/80f1-e534-4b02-9cc2-e2f852cd58ce/back_b261.jpg?auto=compress%2Cformat&fit=max&mark=https%3A%2F%2Felements-assets.envato.com%2Fstatic%2Fwatermark2.png&markalign=center%2Cmiddle&markalpha=18&w=1000&s=e618a4dd65bcb7389db840fd2f7c15ab");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size:cover;
+    width:100%;
+    height:100%;
+  }
+  h1{
+    font-family: "Times New Roman", Times, serif;
+  }
 
-#customers td, #customers th {
-  border: 1px solid #ddd;
-  padding: 8px;
-}
+  #customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 40%;
+    box-shadow:2px 2px 2px 2px #888888;
+  }
 
-#customers tr:nth-child(even){background-color: #f2f2f2;}
+  #customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
 
-#customers tr:hover {background-color: #ddd;}
+  #customers tr:nth-child(even){
+    background-color: #f2f2f2;
+    }
 
-#customers th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #4CAF50;
-  color: white;
-}
-#det:hover{
-color:green;
-}
+  #customers tr:hover {
+    background-color: #ddd;
+    }
+
+  #customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  #details{
+    color:#000f20;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    text-shadow: 2px 2px 2px #CCCCCC;
+    size:12px;
+  }
+
 </style>
 </head>
-<b><h1>Welcome!</b></h1>
 <br>
-<br>
-<h2><i id="details">Your details are shown below..</i><br><br><br></h2>
-</br></br>
+<h2><a id="details">Your required nutrient levels are shown below</a><br></h2>
 <table id="customers">
   <tr>
-    <th>User</th>
-    <th>Proteins</th>
-    <th>Carbohydrate</th>
-    <th>Fats</th>
-    <th>Calories</th>
+    <th>Nutrients</th>
+    <th>Amount</th>
   </tr>
   <tr>
-    <td>{{ user }}</td>
-    <td>{{ proteins }}</td>
-    <td>{{ carbs }}</td>
-    <td>{{ fats }}</td>
-    <td>{{ calories }}</td>
+    <td>Calories</td><td>{{ calories }}</td>
+  </tr>
+  <tr>
+    <td>Carbohydrates</td><td>{{ carbs }}</td>
+  </tr>
+  <tr>
+    <td>Proteins</td><td>{{ proteins }}</td>
+  </tr>
+  <tr>
+    <td>Fats</td><td>{{ fats }}</td>
   </tr>
 </table>
 </br></br>
-<h2>Your diet plan: </h2></br></br>
-<table id="customers">
+<h2 id="details">Select diet plan for you: </h2>
+<input type="submit" value="Select Diet"/>
+{% comment %} <table id="customers">
   <tr>
     <th>Item</th>
     <th>Count</th>
@@ -88,6 +96,6 @@ color:green;
       {{ j }}
     {% endfor %}
   {% endfor %}
-</div>
+</div> {% endcomment %}
 </body>
 </html>
