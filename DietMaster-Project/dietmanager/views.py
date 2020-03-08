@@ -143,7 +143,7 @@ def health(request):
     else:
         try:
             v = HealthModel.objects.get(username=current_user)
-            return render(request, "dietmanager/home.html")
+            return render(request, "dietmanager/home.html",{"calories":v.calories,"carbs":v.carbs,"proteins":v.proteins,"fats":v.fats,"diet":"diet","avoidable":"avoidables"})
         except:
             return render(request, "dietmanager/health1.html")
 
