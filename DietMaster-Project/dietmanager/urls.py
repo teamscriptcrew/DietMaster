@@ -7,10 +7,8 @@ urlpatterns = [
     url(r'^main/$', views.main, name="main"),
     url(r'^login/$', views.login_user, name="login_user"),
     url(r'^health/$', views.health, name="health"),
-    url(r'^store/$', views.store, name="store"),
     url(r'^getdiet/$', views.getDiet, name="getdiet"),
-    url(r'^track/$',views.store, name="track"),
     url(r'^getdiet/$',views.getDiet, name="getdiet"),
-    url(r'^response/$',views.store,name="response"),
+    url(r'^select/$',views.getFood,name="food"),
 
 ]
